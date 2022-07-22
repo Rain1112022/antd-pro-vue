@@ -18,6 +18,9 @@ const constantRouterComponents = {
   Workplace: () => import('@/views/dashboard/Workplace'),
   Analysis: () => import('@/views/dashboard/Analysis'),
 
+  // screen
+  ScreenShow: () => import('@/views/screen/ScreenShow'),
+
   // form
   BasicForm: () => import('@/views/form/basicForm'),
   StepForm: () => import('@/views/form/stepForm/StepForm'),
@@ -68,7 +71,8 @@ const rootRouter = {
   name: 'index',
   path: '',
   component: 'BasicLayout',
-  redirect: '/dashboard',
+  // redirect: '/dashboard',
+  redirect: '/screen',
   meta: {
     title: '首页'
   },

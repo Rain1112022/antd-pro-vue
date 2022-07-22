@@ -1,6 +1,4 @@
-# 创建我的仓库 antd-pro-vue 的过程
-
-## 使用现有的框架 ant-design-pro-vue 作为项目的基础
+## 创建我的仓库 antd-pro-vue 的过程（使用现有的框架 ant-design-pro-vue 作为项目的基础）
 
 ### 首先将克隆下来的项目上传到自己仓库：
 - clone你需要的项目（antd-pro-vue）
@@ -37,3 +35,20 @@
   `$ git push --set-upstream origin dev2`
 
 ### 这时再列出分支会有master、dev、dev2；我们使用dev分支进行开发，切换到dev上
+
+
+
+
+## 在侧边栏再加一个大屏展示页面，具体过程为：
+
+### 配路由
+- 在generator-router.js文件前端路由表中加上大屏页面
+- 在router.config.js文件中配置大屏页面的路由
+  - 一定要在根路径（/）的children中配置
+  - 大屏展示页面是screen（父）目录下的screenshow（子），所以要在screen中为screenshow配置路由出口
+  - 我们想一进入页面就默认展示大屏，所以根目录的重定向路径是/screen/screenshow；在generator-router.js文件的根级菜单下也修改一下默认路径
+  
+- 在views文件夹下新建screen文件夹，在screen文件夹下新建ScreenShow.vue文件
+- 在permission.js中修改默认路由路径是screenshow
+`const defaultRoutePath = '/screen/screenshow'`
+- 在mock/services/user.js中：首先添加管理员拥有的权限；再在userNav中加上大屏这个导航标签（在这里要注意parentId和id的配置）

@@ -239,11 +239,11 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<!-- <style lang="less" scoped>
   .title {
     color: rgba(0,0,0,.85);
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 16px;
   }
-</style>
+</style> -->

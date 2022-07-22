@@ -13,8 +13,26 @@ export const asyncRouterMap = [
     name: 'index',
     component: BasicLayout,
     meta: { title: 'menu.home' },
-    redirect: '/dashboard/workplace',
+    // redirect: '/dashboard/workplace',
+    redirect: '/screen/screenshow',
     children: [
+      // screen
+      {
+        path: '/screen',
+        name: 'screen',
+        redirect: '/screen/screenshow',
+        component: RouteView,
+        meta: { title: 'menu.screen', keepAlive: true, permission: ['screen'] },
+        children: [
+          {
+            path: '/screen/screenshow',
+            name: 'ScreenShow',
+            component: () => import('@/views/screen/ScreenShow'),
+            meta: { title: 'menu.screen.screenshow', keepAlive: false, permission: ['screen'] }
+          }
+        ]
+      },
+
       // dashboard
       {
         path: '/dashboard',
