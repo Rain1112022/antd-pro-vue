@@ -40,7 +40,6 @@
 
 
 ## 在侧边栏再加一个大屏展示页面，具体过程为：
-
 ### 配路由
 - 在generator-router.js文件前端路由表中加上大屏页面
 - 在router.config.js文件中配置大屏页面的路由
@@ -52,3 +51,14 @@
 - 在permission.js中修改默认路由路径是screenshow
 `const defaultRoutePath = '/screen/screenshow'`
 - 在mock/services/user.js中：首先添加管理员拥有的权限；再在userNav中加上大屏这个导航标签（在这里要注意parentId和id的配置）
+
+## 安装echarts并引入
+### 用npm安装依赖echarts  `npm install echarts --save`
+- 在main.js文件中引入echarts，并创建$echarts实例
+- 注意在echarts5.0以上版本引入时，需要添加* as，否则会引入失败指令为：`import * as echarts from 'echarts'`
+- 在需要用到echart的页面：
+  - 可以：首先创建一个dom节点并绑定id用以承载echarts图表；接着在methods中通过 echarts.init 方法初始化一个 echarts 实例并通过 setOption 方法生成；
+  - 也可以： （通过 npm 上安装的 ECharts会放在node_modules目录下。可以直接在项目代码中 require('echarts') 得到 ECharts。）`var echarts = require('echarts')`；
+  
+
+
