@@ -19,6 +19,9 @@ require('vue-video-player/src/custom-theme.css')
 // import 'vue-video-player/src/custom-theme.css'
 // import 'video.js/dist/video-js.css'
 const hls = require('videojs-contrib-hls')
+import svgJs from '@/svg'
+import axios from 'axios'
+Vue.prototype.$axios = axios
 
 // mock
 // WARNING: `mockjs` NOT SUPPORT `IE` PLEASE DO NOT USE IN `production` ENV.
@@ -36,6 +39,7 @@ Vue.config.productionTip = false
 Vue.use(VueAxios)
 Vue.use(VideoPlayer)
 Vue.use(hls)
+Vue.use(svgJs)
 Vue.prototype.$echarts = echarts
 Vue.prototype.$video = Video
 // use pro-layout components

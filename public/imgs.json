@@ -1,0 +1,46 @@
+{
+  "code": 0,
+  "st": "SUCCESS",
+  "data": [
+    {
+      "id": "001",
+      "src": "@/assets/image/001.jpg"
+    },
+    {
+      "id": "002",
+      "src": "@/assets/image/002.jpeg"
+    },
+    {
+      "id": "003",
+      "src": "@/assets/image/003.jpeg"
+    },
+    {
+      "id": "004",
+      "src": "@/assets/image/004.jpeg"
+    },
+    {
+      "id": "005",
+      "src": "@/assets/image/005.jpeg"
+    },
+    {
+      "id": "006",
+      "src": "@/assets/image/006.jpeg"
+    },
+    {
+      "id": "007",
+      "src": "@/assets/image/007.jpeg"
+    },
+    {
+      "id": "008",
+      "src": "@/assets/image/008.jpeg"
+    },
+    {
+      "id": "009",
+      "src": "@/assets/image/009.jpeg"
+    },
+    {
+      "id": "010",
+      "src": "@/assets/image/010.jpeg"
+    }
+  ]
+}

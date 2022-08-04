@@ -1,15 +1,24 @@
 <template>
   <div>
-    Monitor
+    <h1>Canvas</h1>
+   
   </div>
-</template>
+</template> 
 
 <script>
 export default {
-  name: 'Monitor'
+   name: 'Monitor',
+   data(){
+    return{
+    }
+   },
+  mounted() {
+   
+  }
+    
 }
 </script>
 
-<style scoped>
+<style lang="less">
 
 </style>

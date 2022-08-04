@@ -62,3 +62,102 @@
   
 
 
+## js mjpeg buffer stream
+
+### Uint8Array  ArrayBuffer
+`let lineBuffer = new Uint8Array(new ArrayBuffer(1000));` 创建初始化为0，包含1000个字节的缓存区的无符号整型数组；
+- `Uint8Array` 数组类型表示一个8位无符号整型数组，创建时内容被初始化为0。创建完后，可以以对象的方式或使用数组下标索引的方式引用数组中的元素；
+- `ArrayBuffer` 对象用来表示 「通用的、固定长度的」原始二进制数据缓冲区。「ArrayBuffer 不能直接操作，而是要通过类型数组对象 或 DataView 对象来操作」 ，它们会将缓冲区中的数据表示为特定的格式，并通过这些格式来读写缓冲区的内容。
+- `new Uint8Array(new ArrayBuffer(imageLength))`:创建初始化为0，包含imageLength字节个元素的无符号整型数组
+
+### Blob
+- `Blob（Binary Large Object）`表示二进制类型的大对象。在数据库管理系统中，将二进制数据存储为一个单一个体的集合。Blob 通常是影像、声音或多媒体文件。Blob构造函数的语法为：`var aBlob = newBlob(blobParts, options);`  blobParts：它是一个由 ArrayBuffer，ArrayBufferView，Blob，DOMString 等对象构成的数组。DOMStrings 会被编码为 UTF-8。 options：一个可选的对象
+- 在浏览器中，我们使用 `URL.createObjectURL` 方法来创建 Blob URL，该方法接收一个 Blob 对象，并为其创建一个唯一的 URL。浏览器内部为每个通过 URL.createObjectURL 生成的 URL 存储了一个 「URL → Blob」映射。因此，此类 URL 较短，但可以访问 Blob 。
+- 这里我们先把响应对象转换为 ArrayBuffer 对象，然后通过调用 Blob 构造函数，把 ArrayBuffer 对象转换为 Blob 对象，再利用 createObjectURL 方法创建 Object URL，最终实现图片预览
+
+### Canvas
+- 在画布上定位图像—> context.drawImage(img,x,y);
+- 在画布上定位图像，并规定图像的宽度和高度—> context.drawImage(img,x,y,width,height);
+- 剪切图像，并在画布上定位被剪切的部分—> context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
+- 绘制一个描边矩形，直接绘制,不需要手动调用stroke()：ctx.strokeRect( 起点x轴坐标，起点y轴坐标，宽，高 )
+
+
+### console.error()   
+
+- console.error() 方法用于输出错误信息到控制台。
+- console.log() 用于输出普通信息
+- 主要区别在于console.error()会显示带有错误标志的错误信息提示，更加醒目
+
+### 流操作：ReadableStream
+- 流操作API中的`ReadableStream`接口呈现了一个可读取的二进制流操作。Fetch API 通过`Response`的`body`属性提供了一个具体的`ReadableStream`对象；
+- `ReadableStream.getReader()`方法创建一个读取器并将流锁定于其上，一旦流被锁定，其他读取器不能读取它，直到它被释放；
+
+### obj[key]和obj[‘key’]
+- 两个的主要区别是：如果key值不确定，而是一个变量的时候，只能通过obj[key]来访问
+- obj[key] : key代表的是循环中的一个变量
+- obj[‘key’] : key代表的是obj的一个属性，obj[‘key’]即代表的是取obj的key属性值
+- obj.key : 此时obj.key相当于obj[‘key’],key代表的是obj的一个属性
+
+## 立即执行函数
+
+### 诸如下面形式的函数称之为立即执行函数。
+
+```
+  (function() {
+    // code
+  }());
+```
+### 自执行函数
+
+- 当声明类似`function foo(){}`或`var foo = function(){}`函数的时候，通过在后面加个括弧就可以实现自执行;
+  - 比如想下面第一个声明的`function`可以在后面加一个括弧()就可以自己执行了(foo仅仅是function() { /* code */ }这个表达式的一个引用);
+  - 但并不意味着后面加一个括弧都可以自动执行,比如第二行代码会报错，因为解析器在解析全局function或function内部的function关键字的时候，默认是认为function声明，而不是function表达式，如果你不显示告诉编译器，它默认会声明成一个缺少名字的function，并抛出一个语法错误，因为function声明需要一个名字；
+  - 但是即便你为这个错误代码加一个名字，它也会显示语法错误，只不过显示的原因不一样；在一个表达式后面加上（），该表达式会立即执行，但是在一个语句后面加（），是完全不一样的意思，它只是分组操作符，比如第三行代码：它在语法上没问题，但依然会报错，因为分组操作符需要包含表达式；
+  - 但如果你在（）传入一个表达式，如第四行代码，它不会有异常抛出，foo函数却依然不会执行；它等价于第五、六行代码：在一个function声明后面又声明了一个毫无关系的表达式
+  ```
+   var foo = function(){ /* code */ } 
+   function(){ /* code */ }(); // SyntaxError: Unexpected token 
+   function foo(){ /* code */ }();// SyntaxError: Unexpected token 
+   function foo(){ /* code */ }( 1 );
+   function foo(){ /* code */ }
+   ( 1 );
+  ```
+
+- 要解决上述问题，我们只需要用（）将全部代码括住就行了，因为JavaScript里括弧里面不能包含语句，所以在这一点上，解析器在解析function关键字的时候，会将相应的代码解析成function表达式，而不是function声明。
+  - 如下两行括弧都会立即执行(更推荐第一行的方法)
+  ```
+  (function () {/* code */} ());
+  (function () {/** code /})()
+  ```
+
+- 用闭包保存状态
+  - 和普通function执行的时候传参数一样，自执行的函数表达式也可以这么传参，因为闭包可以直接引用传入的这些参数，利用这些被lock住的传入参数，自执行函数表达式可以有效地保存状态。
+  - 如以下代码，在自执行函数表达式闭包内部，i的值作为locked的索引存在，在循环执行结束以后，尽管最后i的值变成a元素总数，但闭包内部的lockedInIndex值没有变，因为它已经执行完毕了
+  ```
+  var elems = document.getElementsByTagName('a')
+  for (var i = 0; i < elems.length; i++) {
+
+    (function (lockedInIndex) {
+
+        elems[i].addEventListener('click', function (e) {
+            e.preventDefault();
+            alert('I am link #' + lockedInIndex);
+        }, 'false');
+
+    })(i);
+  }
+  ```
+  - 以上代码也可以有另一种写法，在处理函数那里使用自执行函数表达式，而不是在addEventListener外部;
+  ```
+  var elems = document.getElementsByTagName('a');
+  for (var i = 0; i < elems.length; i++) {
+
+    elems[i].addEventListener('click', (function (lockedInIndex) {
+        return function (e) {
+            e.preventDefault();
+            alert('I am link #' + lockedInIndex);
+        };
+    })(i), 'false');
+
+  }
+  ```

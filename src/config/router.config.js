@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import { UserLayout, BasicLayout, BlankLayout } from '@/layouts'
 import { bxAnaalyse } from '@/core/icons'
-
+// render (h) => {return h('router-view')}中的h函数是vue.js中的createElement函数。这句代码表示创建并渲染一个DOM元素节点（创建的DOM元素可以是任何能创建的元素）
 const RouteView = {
   name: 'RouteView',
   render: h => h('router-view')
@@ -14,7 +14,8 @@ export const asyncRouterMap = [
     component: BasicLayout,
     meta: { title: 'menu.home' },
     // redirect: '/dashboard/workplace',
-    redirect: '/screen/screenshow',
+    // redirect: '/screen/screenshow',
+    redirect: '/screen/requestdata',
     children: [
       // screen
       {
@@ -29,6 +30,19 @@ export const asyncRouterMap = [
             name: 'ScreenShow',
             component: () => import('@/views/screen/ScreenShow'),
             meta: { title: 'menu.screen.screenshow', keepAlive: false, permission: ['screen'] }
+          },
+          {
+            path: '/screen/requestdata',
+            name: ' RequestData',
+            component: () => import('@/views/screen/RequestData'),
+            meta: {title: 'menu.screen.requestdata', keepAlive: false,permission:['screen']}
+          },
+          ,
+          {
+            path: '/screen/geochina',
+            name: ' GeoChina',
+            component: () => import('@/views/screen/GeoChina'),
+            meta: {title: 'menu.screen.geochina', keepAlive: false,permission:['screen']}
           }
         ]
       },
@@ -49,9 +63,13 @@ export const asyncRouterMap = [
           },
           // 外部链接
           {
-            path: 'https://www.baidu.com/',
+            // path: 'https://www.baidu.com/',
+            path: '/dashboard/monitor',
             name: 'Monitor',
-            meta: { title: 'menu.dashboard.monitor', target: '_blank' }
+            component: () => import('@/views/dashboard/Monitor'),
+            // meta: { title: 'menu.dashboard.monitor', target: '_blank' }
+            meta: { title: 'menu.dashboard.monitor', keepAlive: true, permission: ['dashboard'] }
+
           },
           {
             path: '/dashboard/workplace',

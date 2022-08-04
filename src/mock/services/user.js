@@ -2,7 +2,7 @@ import Mock from 'mockjs2'
 import { builder } from '../util'
 
 const info = options => {
-  console.log('options', options)
+  // console.log('options', options)
   const userInfo = {
     id: '4291d7da9005377ec9aec4a71ea837f',
     name: '天野远子',
@@ -520,7 +520,8 @@ const userNav = options => {
         show: true
       },
       component: 'RouteView',
-      redirect: '/screen/screenshow'
+      // redirect: '/screen/screenshow'
+      redirect: '/screen/requestdata'
     },
     {
       name: 'screenshow',
@@ -531,6 +532,28 @@ const userNav = options => {
         show: true
       },
       component: 'ScreenShow'
+    },
+    {
+      name: 'requestdata',
+      parentId: 10040,
+      id: 10042,
+      meta: {
+        title: '数据请求',
+        show: true
+      },
+      component: 'RequestData',
+      path: '/screen/requestdata'
+    },
+    {
+      name: 'geochina',
+      parentId: 10040,
+      id: 10043,
+      meta: {
+        title: '中国地图',
+        show: true
+      },
+      component: 'GeoChina',
+      path: '/screen/geochina'
     },
 
     // dashboard
@@ -558,14 +581,16 @@ const userNav = options => {
     },
     {
       name: 'monitor',
-      path: 'https://www.baidu.com/',
+      // path: 'https://www.baidu.com/',
       parentId: 1,
       id: 3,
       meta: {
         title: '监控页（外部）',
-        target: '_blank',
+        // target: '_blank',
         show: true
-      }
+      },
+      component: 'Monitor',
+      path: '/dashboard/monitor'
     },
     {
       name: 'Analysis',
@@ -913,7 +938,7 @@ const userNav = options => {
     }
   ]
   const json = builder(nav)
-  console.log('json', json)
+  // console.log('json', json)
   return json
 }
 

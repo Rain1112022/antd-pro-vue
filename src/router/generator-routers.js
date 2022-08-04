@@ -15,11 +15,16 @@ const constantRouterComponents = {
   '500': () => import(/* webpackChunkName: "error" */ '@/views/exception/500'),
 
   // 你需要动态引入的页面组件
-  Workplace: () => import('@/views/dashboard/Workplace'),
-  Analysis: () => import('@/views/dashboard/Analysis'),
 
   // screen
   ScreenShow: () => import('@/views/screen/ScreenShow'),
+  RequestData: ()=> import('@/views/screen/RequestData'),
+  GeoChina: () => import('@/views/screen/GeoChina'),
+
+  // dashboard
+  Workplace: () => import('@/views/dashboard/Workplace'),
+  Analysis: () => import('@/views/dashboard/Analysis'),
+  Monitor: () => import('@/views/dashboard/Monitor'),
 
   // form
   BasicForm: () => import('@/views/form/basicForm'),
@@ -89,7 +94,7 @@ export const generatorDynamicRouter = token => {
     loginService
       .getCurrentUserNav(token)
       .then(res => {
-        console.log('generatorDynamicRouter response:', res)
+        // console.log('generatorDynamicRouter response:', res)
         const { result } = res
         const menuNav = []
         const childrenNav = []
@@ -97,10 +102,10 @@ export const generatorDynamicRouter = token => {
         listToTree(result, childrenNav, 0)
         rootRouter.children = childrenNav
         menuNav.push(rootRouter)
-        console.log('menuNav', menuNav)
+        // console.log('menuNav', menuNav)
         const routers = generator(menuNav)
         routers.push(notFoundRouter)
-        console.log('routers', routers)
+        // console.log('routers', routers)
         resolve(routers)
       })
       .catch(err => {
