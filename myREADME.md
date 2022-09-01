@@ -36,6 +36,43 @@
 
 ### 这时再列出分支会有master、dev、dev2；我们使用dev分支进行开发，切换到dev上
 
+## 项目文件夹说明
+- build
+  - index.js: webpack配置文件
+
+- mock: mock数据的文件夹;模拟一些假的数据mockjs实现的，因为咱们实际开发的时候，利用的是真是接口
+- node_modules:项目依赖的模块
+- public:经常放置一些静态资源，而且在项目打包的时候webpack不会编译这个文件夹，原封不动的打包到dist文件夹里面
+- src:源代码的地方
+  - api文件夹: 涉及请求相关的
+  - assets文件夹：里面放置一些静态资源（一般共享的），放在aseets文件夹里面静态资源，在webpack打包的时候，会进行编译
+  - components文件夹：一般放置非路由组件获取全局组件
+  - icons这个文件夹的里面放置了一些svg矢量图
+  - layout文件夹：他里面放置一些组件与混入
+  - router文件夹：与路由相关的
+  - store文件夹：一定是与vuex相关的
+  - style文件夹：与样式相关的
+  - utils文件夹：request.js是axios二次封装文件
+  - views文件夹：里面放置的是路由组件
+  
+- App.vue:根组件
+- main.js：入口文件
+- permission.js:与导航守卫先关
+- settings：项目配置项文件
+- .editorconfig 编程风格文件:比如缩进多少之类的控制
+- .env.development  webpack配置文件 开发环境的配置文件
+- .eslintignore 校验的时候忽略哪些文件
+- .eslintrc.js  eslintrc配置文件
+- .gitignore    忽略文件
+- .travis.yml    忽略文件
+- babel.config.js   babel配置文件
+- jest.config.js   测试框架配置文件
+- jsconfig.json    src取别名的配置文件
+- LICENSE          版权声明的配置文件
+- package.json     项目版本号,运行依赖
+- postcss.config.js  与css相关的配置文件  比如不同浏览器对display flex有兼容性问题,在不同浏览器加上前缀,这个文件就能解决
+- vue.config.js    我们可以把他当做webpack.config.js文件,像解决跨域什么的,我们经常用这个文件
+  
 
 
 
@@ -62,41 +99,6 @@
   
 
 
-## js mjpeg buffer stream
-
-### Uint8Array  ArrayBuffer
-`let lineBuffer = new Uint8Array(new ArrayBuffer(1000));` 创建初始化为0，包含1000个字节的缓存区的无符号整型数组；
-- `Uint8Array` 数组类型表示一个8位无符号整型数组，创建时内容被初始化为0。创建完后，可以以对象的方式或使用数组下标索引的方式引用数组中的元素；
-- `ArrayBuffer` 对象用来表示 「通用的、固定长度的」原始二进制数据缓冲区。「ArrayBuffer 不能直接操作，而是要通过类型数组对象 或 DataView 对象来操作」 ，它们会将缓冲区中的数据表示为特定的格式，并通过这些格式来读写缓冲区的内容。
-- `new Uint8Array(new ArrayBuffer(imageLength))`:创建初始化为0，包含imageLength字节个元素的无符号整型数组
-
-### Blob
-- `Blob（Binary Large Object）`表示二进制类型的大对象。在数据库管理系统中，将二进制数据存储为一个单一个体的集合。Blob 通常是影像、声音或多媒体文件。Blob构造函数的语法为：`var aBlob = newBlob(blobParts, options);`  blobParts：它是一个由 ArrayBuffer，ArrayBufferView，Blob，DOMString 等对象构成的数组。DOMStrings 会被编码为 UTF-8。 options：一个可选的对象
-- 在浏览器中，我们使用 `URL.createObjectURL` 方法来创建 Blob URL，该方法接收一个 Blob 对象，并为其创建一个唯一的 URL。浏览器内部为每个通过 URL.createObjectURL 生成的 URL 存储了一个 「URL → Blob」映射。因此，此类 URL 较短，但可以访问 Blob 。
-- 这里我们先把响应对象转换为 ArrayBuffer 对象，然后通过调用 Blob 构造函数，把 ArrayBuffer 对象转换为 Blob 对象，再利用 createObjectURL 方法创建 Object URL，最终实现图片预览
-
-### Canvas
-- 在画布上定位图像—> context.drawImage(img,x,y);
-- 在画布上定位图像，并规定图像的宽度和高度—> context.drawImage(img,x,y,width,height);
-- 剪切图像，并在画布上定位被剪切的部分—> context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
-- 绘制一个描边矩形，直接绘制,不需要手动调用stroke()：ctx.strokeRect( 起点x轴坐标，起点y轴坐标，宽，高 )
-
-
-### console.error()   
-
-- console.error() 方法用于输出错误信息到控制台。
-- console.log() 用于输出普通信息
-- 主要区别在于console.error()会显示带有错误标志的错误信息提示，更加醒目
-
-### 流操作：ReadableStream
-- 流操作API中的`ReadableStream`接口呈现了一个可读取的二进制流操作。Fetch API 通过`Response`的`body`属性提供了一个具体的`ReadableStream`对象；
-- `ReadableStream.getReader()`方法创建一个读取器并将流锁定于其上，一旦流被锁定，其他读取器不能读取它，直到它被释放；
-
-### obj[key]和obj[‘key’]
-- 两个的主要区别是：如果key值不确定，而是一个变量的时候，只能通过obj[key]来访问
-- obj[key] : key代表的是循环中的一个变量
-- obj[‘key’] : key代表的是obj的一个属性，obj[‘key’]即代表的是取obj的key属性值
-- obj.key : 此时obj.key相当于obj[‘key’],key代表的是obj的一个属性
 
 ## 立即执行函数
 
@@ -161,3 +163,367 @@
 
   }
   ```
+
+
+
+
+- webSocket 是 HTML5 一种新的协议。它实现了浏览器与服务器全双工通信，能更好的节省服务器资源和带宽并达到实时通讯，它建立在 TCP 之上，同 HTTP 一样通过 TCP 来传输数据，但是它和 HTTP 最大不同是：
+  - WebSocket 是一种双向通信协议，在建立连接后，WebSocket 服务器和 Browser/Client Agent 都能主动的向对方发送或接收数据，就像 Socket 一样；
+  - WebSocket 需要类似 TCP 的客户端和服务器端通过握手连接，连接成功后才能相互通信.
+
+- WebSocket 对象一共支持四个消息 onopen, onmessage, onclose 和 onerror
+  - 当 Browser 和 WebSocketServer 连接成功后，会触发 onopen 消息
+  - 如果连接失败，发送、接收数据失败或者处理数据出现错误，browser 会触发 onerror 消息
+  - 当 Browser 接收到 WebSocketServer 发送过来的数据时，就会触发 onmessage 消息，参数 evt 中包含 Server 传输过来的数据
+  - 当 Browser 接收到 WebSocketServer 端发送的关闭连接请求时，就会触发 onclose 消息
+  
+  ```
+  var ws = new WebSocket(“ws://echo.websocket.org”);  //申请一个webSocket对象，参数是需要连接的服务器端的地址
+  ws.onopen = function(){ws.send(“Test!”); };
+  ws.onmessage = function(evt){console.log(evt.data);ws.close();};
+  ws.onclose = function(evt){console.log(“WebSocketClosed!”);};
+  ws.onerror = function(evt){console.log(“WebSocketError!”);};
+  ```
+
+### eval()函数功能是将某段字符串当成JS语句来执行。
+- eval() 函数计算 JavaScript 字符串，并把它作为脚本代码来执行。如果参数是一个表达式，eval() 函数将执行表达式。如果参数是Javascript语句，eval()将执行 Javascript 语句。
+  
+  ```
+  var a=eval("12");  //相当于 var a=12;
+  var obj = eval("({name:'nick',age:28})");  //相当于 var obj = {name:'nick',age:28};对象（包括函数等）需要放在括号中，否则会报错
+  eval("alert('hello');");   //相当于alert('hello');
+  ```
+
+### jQuery.trigger() 函数用于在每个匹配元素上触发指定类型的事件
+- 该函数可以手动触发执行元素上绑定的事件处理函数，也会触发执行该元素的默认行为:以表单元素<form>为例，使用trigger("submit")可以触发该表单绑定的submit事件，也会执行表单submit事件的默认行为——表单提交操作
+- trigger()函数主要有以下两种形式的用法：
+  - 1,`jQueryObject.trigger( events [, extraArguments ] )` :在每个匹配元素上触发指定类型(events)的事件，并可为事件处理函数传入额外的参数(extraArguments)。
+  - 2,`jQueryObject.trigger( eventObject [, extraArguments ] )`:为指定事件处理函数传入的Event对象(eventObject)，用于触发执行对应的事件处理函数，并可为事件处理函数传入额外的参数(extraArguments)。
+- 参数描述：
+  - `trigger()函数`会为触发执行的事件处理函数传入一个默认参数，也就是表示当前事件的Event对象。参数`extraArguments`用于为事件处理函数传入更多额外的参数。如果`extraArguments`是数组形式，则每个元素都将充当函数的参数。
+  - `events`：`String类型`,指定的事件类型和可选的命名空间，例如"click"、 "focus"、 "keydown.myPlugin"。
+  - `extraArguments`: `可选/Object类型`,为事件处理函数传入的额外参数。如果要传入多个参数，请以数组方式传入。
+  - `eventObject`: `Object类型`一个Event对象，用于触发传入该对象的事件处理函数。
+
+
+
+## 利用filter，可以巧妙地去除Array的重复元素：
+- filter 用于把Array的某些元素过滤掉，然后返回剩下的元素。
+- 和map()类似，Array的filter()也接收一个函数。
+- 和map()不同的是，filter()把传入的函数依次作用于每个元素，然后根据返回值是true还是false决定保留还是丢弃该元素。
+- 去除重复元素依靠的是indexOf总是返回第一个元素的位置，后续的重复元素位置与indexOf返回的位置不相等，因此被filter滤掉了.
+  
+```
+var arr = ['apple', 'strawberry', 'banana', 'pear', 'apple', 'orange', 'orange', 'strawberry'];
+var r = arr.filter(function (element, index, self) {
+     return self.indexOf(element) === index;
+ });
+console.log(r.toString()); //apple,strawberry,banana,pear,orange
+```
+
+## for in && for of
+### 两者区别
+- for of无法循环遍历对象
+- 遍历输出结果不同，for in循环遍历的是数组的键值(索引)，而for of循环遍历的是数组的值。
+- for in 会遍历自定义属性，for of不会（给数组添加一个自定义属性name，并且赋值"数组"。然后进行遍历输出的，会发现新定义的属性也被for in输出来了，而for of并不会对name进行输出）
+### for in
+- 不但可以循环遍历数组，还可以循环遍历对象
+  ```
+  var arr = ['nick','freddy','mike','james'];
+  for(var index in arr){	
+    console.log(index +'. ' + arr[index]); 
+  }
+  // 输出结果：0.nick  1.freddy  2.mike  3.james
+
+  var userMsg = {
+    nick: {
+	    name: 'nick',
+	    age: 18,
+	    sex: '男'	
+    },
+    freddy: {
+	    name: 'freddy',
+	    age: 24,
+	    sex: '男'
+    }	
+  };
+  for(var key1 in userMsg){
+    console.log(key1);	
+    for(var key2 in userMsg[key1]){
+	    console.log(key +': ' + userMsg[key1][key2]);
+    }
+  }
+  //输出结果：nick    name: nick     age: 18     sex: 男  
+             freddy  name: freddy   age: 24     sex: 男
+  ```
+
+### for of 
+- 遍历数组里的每一项
+  ```
+  var arr = [
+    { name:'nick', age:18 },
+    { name:'freddy', age:24 },
+    { name:'mike', age:26 },
+    { name:'james', age:34 }
+  ];
+   for(var item of arr){	
+    console.log(item.name,item.age);
+  }
+  //输出结果：nick 18   freddy 24  mike 26  james 34
+  ```
+
+## ES6：new Map()
+- Map类型是键值对的有序列表，而键和值都可以是任意类型；
+- Map与Set的区别：Set是一种叫做集合的数据结构，Map是一种叫做字典的数据结构
+  > 集合-----是由一堆无序的、相关联的，且不重复的内存结构【数学中称为元素】组成的组合;
+    字典-----是一些元素的集合。每个元素有一个称作key 的域，不同元素的key 各不相同;
+    Set集合是以[值，值]的形式存储元素;
+    Map字典是以[键，值]的形式存储;
+- 在开发过程中，涉及到数据结构，能使用Map 不使用Array 尤其是复杂的数据结构 ，如果对于数组的存储考虑唯一性,使用Set ;优先使用map, 如果要求数据储存的唯一性使用Set; 放弃使用Array
+### 属性
+- size：size属性返回 Map 结构的成员总数。
+  ```
+  const map = new Map();
+  map.set('foo', true);
+  map.set('bar', false);
+
+  map.size // 2
+  ```
+
+### 方法
+- set()：设置键名key对应的键值为value，然后返回整个 Map 结构;如果key已经有值，则键值会被更新，否则就新生成该键,同时返回的是当前Map对象，可采用链式写法.
+  ```
+  const m = new Map();
+  let fn = function(){}
+
+  m.set('edition', 6)        // 键是字符串
+  m.set(fn, 'standard')     // 键是函数
+  m.set(undefined, 'nah')    // 键是 undefined
+  m.set(1, 'a').set(2, 'b').set(3, 'c') // 链式操作
+  ```
+- get(): get方法读取key对应的键值，如果找不到key，返回undefined.
+  ```
+  const m = new Map();
+  const hello = function() {console.log('hello');};
+  m.set(hello, 'Hello ES6!') // 键是函数
+
+  m.get(hello)  // Hello ES6!
+  ```
+- has(): has方法返回一个布尔值，表示某个键是否在当前 Map 对象之中.
+  ```
+  m.has('edition')     // true
+  ```
+- delete(): delete方法删除某个键，返回true。如果删除失败，返回false.
+- clear(): clear方法清除所有成员，没有返回值.
+  ```
+  map.clear()
+  ```
+### 遍历
+- keys()：返回键名的遍历器
+- values()：返回键值的遍历器
+- entries()：返回所有成员的遍历器
+- forEach()：遍历 Map 的所有成员
+  ```
+  const map = new Map([
+  ['F', 'no'],
+  ['T',  'yes'],
+  ]);
+
+  //keys()
+  for (let key of map.keys()) {
+    console.log(key);       // "F"  "T"
+  }
+
+  //values()
+  for (let value of map.values()) {
+    console.log(value);    // "no"  "yes"
+  }
+
+  // entries()
+  for (let item of map.entries()) {
+    console.log(item[0], item[1]);
+  }
+  // "F" "no"  、"T" "yes"
+
+  // 或者
+  for (let [key, value] of map.entries()) {
+    console.log(key, value);
+  }
+  // "F" "no" 、"T" "yes"
+
+  // 等同于使用map.entries()
+  for (let [key, value] of map) {
+    console.log(key, value);
+  }
+  // "F" "no"  、 "T" "yes"
+
+  map.forEach(function(value, key, map) {
+    console.log(key, value);    // "F" "no"  、 "T" "yes"
+  });
+  ```
+## ES6：new Set()
+- Set本身是一个构造函数，用来生成 Set 数据结构，似于数组，但它的一大特性就是所有元素都是唯一的，没有重复的值，我们一般称为集合。
+  
+### 方法
+- add(): 添加元素,添加某个值，返回 Set 结构本身，当添加实例中已经存在的元素，set不会进行处理添加;
+- delete(): 删除元素 ,删除某个值，返回一个布尔值，表示删除是否成功;
+- has(): 判断某元素是否存在, 返回一个布尔值，判断该值是否为Set的成员
+- clear(): 清除所有元素, 清除所有成员，没有返回值
+
+### 遍历 
+- keys():返回键名的遍历器，相等于返回键值遍历器values()
+- values():返回键值的遍历器
+- entries():返回键值对的遍历器
+  ```
+  let list=new Set(['4','5','hello'])
+  for (let item of list.entries()) {
+    console.log(item);
+  }
+  // ['4','4']   ['5','5']   ['hello','hello'] 
+
+  ```
+- forEach():使用回调函数遍历每个成员
+
+### 使用场景
+-  用于数组去重
+  ```
+  let arr = [3, 5, 2, 2, 5, 5];
+  let setArr = new Set(arr)     // 返回set数据结构  Set(3) {3, 5, 2}
+
+  //方法一   es6的...解构
+  let unique1 =  [...setArr ];      //去重转数组后  [3,5,2]
+
+  //方法二  Array.from()解析类数组为数组
+  let unique2 = Array.from(setArr )   //去重转数组后  [3,5,2]
+
+  ```
+-  用于字符串去重
+  ```
+  let str = "352255";
+  let unique = [...new Set(str)].join("");     // 352 
+  ```
+-  实现并集、交集、和差集
+  ```
+  let a = new Set([1, 2, 3]);
+  let b = new Set([4, 3, 2]);
+
+  // 并集
+  let union = new Set([...a, ...b]);
+  // Set {1, 2, 3, 4}
+
+  // 交集
+  let intersect = new Set([...a].filter(x => b.has(x)));
+  // set {2, 3}
+
+  // （a 相对于 b 的）差集
+  let difference = new Set([...a].filter(x => !b.has(x)));
+  // Set {1}
+  ```
+
+## ES6  扩展运算符（...）
+
+### 对象的扩展运算符
+- > 对象中的扩展运算符(...)用于取出参数对象中的所有可遍历属性，拷贝到当前对象之中
+- Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）,方法的第一个参数是目标对象，后面的参数都是源对象。(如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性)。
+  ```
+  let bar = { a: 1, b: 2 };
+  let baz = { ...bar }; // { a: 1, b: 2 }
+  // 上述方法实际上等价于:
+  let baz = Object.assign({}, bar); // { a: 1, b: 2 }
+  // 如果用户自定义的属性，放在扩展运算符后面，则扩展运算符内部的同名属性会被覆盖掉。
+  let baz = {...bar, ...{a:2, b: 4}};  // {a: 2, b: 4}
+  ```
+
+### 数组的扩展运算符
+- 可以将数组转换为参数序列
+  ```
+  function add(x, y) {
+  return x + y;
+  }
+  const numbers = [4, 38];
+  add(...numbers) // 42
+  ```
+- 可以复制数组
+  ```
+  // 直接通过赋值的方式进行数组复制是不可取的
+  const arr1 = [1, 2];
+  const arr2 = arr1;
+  arr2[0] = 2;
+  arr1 // [2, 2]
+  // 用扩展运算符就很方便 
+  const arr2 = [...arr1];
+  ```
+- 扩展运算符可以与解构赋值结合起来，用于生成数组(如果将扩展运算符用于数组赋值，只能放在参数的最后一位，否则会报错)
+  ```
+  const [first, ...rest] = [1, 2, 3, 4, 5];
+  first // 1
+  rest  // [2, 3, 4, 5]
+  ```
+- 扩展运算符还可以将字符串转为真正的数组
+  ```
+  [...'hello']  // [ "h", "e", "l", "l", "o" ]
+  ```
+- 将某些数据结构转为数组
+  ```
+  // arguments对象
+  function foo() {
+    const args = [...arguments];
+  }
+  ```
+
+
+## JS sort() 方法
+  -  sort() 方法用于对数组的元素进行排序；语法：arrayObject.sort(sortby)；参数sortby可选。规定排序顺序。必须是函数。
+  -  如果调用该方法时没有使用参数，将按字母顺序对数组中的元素进行排序，说得更精确点，是按照字符编码的顺序进行排序。要实现这一点，首先应把数组的元素都转换成字符串（如有必要），以便进行比较；
+  -  如果想按照其他标准进行排序，就需要提供比较函数，该函数要比较两个值，然后返回一个用于说明这两个值的相对顺序的数字;比较函数应该具有两个参数 a 和 b，其返回值如下：
+    - 若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。
+    - 若 a 等于 b，则返回 0。
+    - 若 a 大于 b，则返回一个大于 0 的值。
+  ```
+  function sortNumber(a, b){
+   return a - b; //这里返回的是他们的差值，如果是大于0的值，就会将b排在前面，如果小于0,
+   就会将a排在前面，如果是0的话，就随便。（冒泡排序法！！）
+   }
+  ```
+
+  ```
+  var arr = [23,12,1,34,116,8,18,37,56,50];
+  function sequence(a,b){
+    if (a>b) {
+      return 1;
+    }else if(a<b){
+      return -1
+    }else{
+      return 0;
+    }
+  }
+  console.log(arr.sort(sequence)); //[1, 8, 12, 18, 23, 34, 37, 50, 56, 116]
+  ```
+
+  ```
+  var arr = [23,12,1,34,116,8,18,37,56,50];
+  var arr2 = arr.sort(function(a,b){
+     if (a>b) {
+      return 1;
+    }else if(a<b){
+      return -1
+    }else{
+      return 0;
+    } 
+  })
+  console.log(arr2)  //[1, 8, 12, 18, 23, 34, 37, 50, 56, 116]
+  ```
+- 也可以简化成这样的写法(因为：若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值)
+  ```
+  var arr = [23,12,1,34,116,8,18,37,56,50];
+  function sequence(a,b){
+    return a - b;
+  }
+  console.log(arr.sort(sequence));  //[1, 8, 12, 18, 23, 34, 37, 50, 56, 116]
+  ```
+
+
+
+
+
+## 

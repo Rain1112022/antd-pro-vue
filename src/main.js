@@ -32,6 +32,23 @@ import './core/lazy_use' // use lazy load components
 import './permission' // permission control
 import './utils/filter' // global filter
 import './global.less' // global style
+// 引入高德地图
+import VueAMap from 'vue-amap'
+Vue.use(VueAMap)
+// 初始化地图
+// AMap.initAMapApiLoader({
+//   key: '7c3377c7966e7693b4eb78bc1a3a686f',
+//   plugin:[
+//     'AMap.Autocomplete',
+//     'AMap.PlaceSearch',
+//     'AMap.Scale',
+//     'AMap.OverView',
+//     'AMap.ToolBar',
+//     'AMap.MapType',
+//     'AMap.PolyEditor',
+//     'AMap.CircleEditor'
+//   ]
+// })
 
 Vue.config.productionTip = false
 
@@ -48,6 +65,9 @@ Vue.component('page-container', PageHeaderWrapper)
 Vue.component('page-header-wrapper', PageHeaderWrapper)
 
 window.umi_plugin_ant_themeVar = themePluginConfig.theme
+
+import jquery from 'jquery';
+Vue.prototype.$ = jquery
 
 new Vue({
   router,

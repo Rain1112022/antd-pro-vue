@@ -14,8 +14,8 @@ export const asyncRouterMap = [
     component: BasicLayout,
     meta: { title: 'menu.home' },
     // redirect: '/dashboard/workplace',
-    // redirect: '/screen/screenshow',
-    redirect: '/screen/requestdata',
+    redirect: '/screen/screenshow',
+    // redirect: '/screen/geochina',
     children: [
       // screen
       {
@@ -27,22 +27,22 @@ export const asyncRouterMap = [
         children: [
           {
             path: '/screen/screenshow',
-            name: 'ScreenShow',
-            component: () => import('@/views/screen/ScreenShow'),
-            meta: { title: 'menu.screen.screenshow', keepAlive: false, permission: ['screen'] }
+            name: 'screenShow',
+            component: () => import('@/views/screen/screenShow'),
+            meta: { title: 'menu.screen.screenShow', keepAlive: false, permission: ['screen'] }
           },
           {
-            path: '/screen/requestdata',
-            name: ' RequestData',
-            component: () => import('@/views/screen/RequestData'),
-            meta: {title: 'menu.screen.requestdata', keepAlive: false,permission:['screen']}
+            path: '/screen/mjpeg',
+            name: ' mjpeg',
+            component: () => import('@/views/screen/mjpeg'),
+            meta: {title: 'menu.screen.mjpeg', keepAlive: false,permission:['screen']}
           },
-          ,
+          
           {
             path: '/screen/geochina',
-            name: ' GeoChina',
-            component: () => import('@/views/screen/GeoChina'),
-            meta: {title: 'menu.screen.geochina', keepAlive: false,permission:['screen']}
+            name: ' geoChina',
+            component: () => import('@/views/screen/geoChina'),
+            meta: {title: 'menu.screen.geoChina', keepAlive: false,permission:['screen']}
           }
         ]
       },

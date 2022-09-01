@@ -17,9 +17,9 @@ const constantRouterComponents = {
   // 你需要动态引入的页面组件
 
   // screen
-  ScreenShow: () => import('@/views/screen/ScreenShow'),
-  RequestData: ()=> import('@/views/screen/RequestData'),
-  GeoChina: () => import('@/views/screen/GeoChina'),
+  screenShow: () => import('@/views/screen/screenShow'),
+  mjpeg: ()=> import('@/views/screen/mjpeg'),
+  geoChina: () => import('@/views/screen/geoChina'),
 
   // dashboard
   Workplace: () => import('@/views/dashboard/Workplace'),

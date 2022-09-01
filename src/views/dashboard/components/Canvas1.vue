@@ -20,7 +20,6 @@
   </div>
 </template> 
 
-<script></script>
 <script>
 export default {
    name: 'Canvas1',

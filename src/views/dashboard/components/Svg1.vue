@@ -4,7 +4,7 @@
     <h1>这是个svg练手(静态)，所以封装成组件，并没有在其他页面引用</h1>
    
     <div class="drawing-panel">
-       <img src="@/assets/img/001.jpg" alt="" ref="drawing-panel" id="drawing">
+       
        <svg  width ="320px"  height ="320px" >
           <path  d ="M10 315
            L 110 215

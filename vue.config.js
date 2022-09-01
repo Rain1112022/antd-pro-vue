@@ -40,6 +40,10 @@ const assetsCDN = {
 // vue.config.js
 const vueConfig = {
   configureWebpack: {
+    externals: {
+      AMap: "AMap", //加这个！！
+      AMapUI: "AMapUI"
+    },
     // webpack plugins
     plugins: [
       // Ignore all locale files of moment.js

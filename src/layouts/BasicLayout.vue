@@ -25,9 +25,7 @@
         <h1>{{ title }}</h1>
       </div>
     </template>
-    <!-- 1.0.0+ 版本 pro-layout 提供 API,
-          增加 Header 左侧内容区自定义
-    -->
+    <!-- 1.0.0+ 版本 pro-layout 提供 API,增加 Header 左侧内容区自定义 -->
     <template v-slot:headerContentRender>
       <div>
         <a-tooltip title="刷新页面">
@@ -45,9 +43,9 @@
       <right-content :top-menu="settings.layout === 'topmenu'" :is-mobile="isMobile" :theme="settings.theme" />
     </template>
     <!-- custom footer / 自定义Footer -->
-    <template v-slot:footerRender>
+    <!-- <template v-slot:footerRender>
       <global-footer />
-    </template>
+    </template> -->
     <router-view />
   </pro-layout>
 </template>

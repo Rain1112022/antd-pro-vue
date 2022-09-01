@@ -2,10 +2,13 @@
     <div class="wrap">
         <div class="top-content">
             <div class="left-wrap">
-                <div id="myChart1" :style="{ 'width': '850px', 'height': '400px' }"></div>
+                <div class="chart-title">
+                    {{chartTitle}}
+                </div>
+                <div class="chart-wrapper" id="myChart1" ></div>
             </div>
-            
-            <div class="right-wrap">
+
+            <div class="middle-wrap">
                 <div class="item">
                     <video-item :videoInfo="{ 'name': 'Camera1' }"></video-item>
                 </div>
@@ -17,6 +20,12 @@
                 </div>
                 <div class="item">
                     <video-item :videoInfo="{ 'name': 'Camera4' }"></video-item>
+                </div>
+            </div>
+
+            <div class="right-wrap">
+                <div class="list-warp">
+                    <warn-list></warn-list>
                 </div>
             </div>
         </div>
@@ -41,14 +50,23 @@
 </template>
 <script>
 // import * as echarts from "echarts"
+import WarnList from './components/WarnList.vue'
 import PieChart from './components/PieChart.vue'
 import BarLineChart from './components/BarLineChart.vue'
 import DataTable from './components/DataTable.vue'
-import VideoItem from './/components/VideoItem.vue'
+import VideoItem from './components/VideoItem.vue'
 export default {
     name: 'ScreenShow',
+    components:{
+        WarnList,
+        PieChart,
+        BarLineChart,
+        DataTable,
+        VideoItem
+    },
     data() {
         return {
+            chartTitle:'月度统计',
             //图表配置项对象
             option1: {
                 color: ["#5ACC23"],  //柱状图的柱子颜色color: 'blue',
@@ -62,9 +80,7 @@ export default {
                         }
                     }
                 },
-                title: {
-                    text: '柱状图示例'
-                },
+               
                 legend: {    // legend属性是显示对数据的解释标准，能够明显的找出不同颜色的折线代表着什么数据
                     data: ['平均时间']
                 },
@@ -164,12 +180,7 @@ export default {
             myChart1Obj: null        //图表对象
         };
     },
-    components:{
-        PieChart,
-        BarLineChart,
-        DataTable,
-        VideoItem
-    },
+    
     methods: {
         // getData() {   //获取数据并赋值给option1.series.data
         //   var jsonstr = [];
@@ -202,24 +213,51 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
+
+
   @borderColor:#888;
   .wrap{
+    width: 100%;
+    height: 100%;
     padding: 8px;
     box-sizing: border-box;
     .top-content{
         width: 100%;
-        // height: 600px;
+        height: 48%;
         display: flex;
         box-sizing: border-box;
         // border: 2px solid #999;
-        .left-wrap{
-            width: 56%;
-            margin-right: 2%;
-            box-sizing: border-box;
-            border: 2px solid rgba(25, 186, 139, 0.3);
-        }
-        .right-wrap{
-            width: 42%;
+        .left-wrap {
+                position: relative;
+                width: 34%;
+                // height: 100%;
+                margin-right: 1%;
+                box-sizing: border-box;
+                border: 2px solid rgba(25, 186, 139, 0.3);
+        
+                .chart-title {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    font-size: 16px;
+                    color: #464646;
+                    font-weight: bold;
+                    line-height: 20px;
+                    margin: 20px 0 20px 14px;
+                    padding-left: 4px;
+                    border-left: 4px solid #276BDD;
+                }
+        
+                .chart-wrapper {
+                    width: 80%;
+                    height: 85%;
+                    margin-top: 30px;
+                }
+            }
+        .middle-wrap{
+            width: 32%;
+            margin-right: 1%;
             padding: 40px 10px 0 10px;
             display: flex;
             justify-content: space-around;
@@ -230,10 +268,15 @@ export default {
             .item{
                 width: 40%;
                 height: 200px;
-                &:nth-of-type(2n+1){
-                    margin-right: 10px;
-                }
+                // &:nth-of-type(2n+1){
+                //     margin-right: 10px;
+                // }
             }
+        }
+        .right-wrap{
+            width: 32%;
+            box-sizing: border-box;
+            border: 2px solid rgba(25, 186, 139, 0.3);
         }
     }
     .bottom-content{

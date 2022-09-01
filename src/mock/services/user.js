@@ -521,7 +521,7 @@ const userNav = options => {
       },
       component: 'RouteView',
       // redirect: '/screen/screenshow'
-      redirect: '/screen/requestdata'
+      redirect: '/screen/mjpeg'
     },
     {
       name: 'screenshow',
@@ -531,18 +531,18 @@ const userNav = options => {
         title: '大屏展示',
         show: true
       },
-      component: 'ScreenShow'
+      component: 'screenShow'
     },
     {
-      name: 'requestdata',
+      name: 'mjpeg',
       parentId: 10040,
       id: 10042,
       meta: {
-        title: '数据请求',
+        title: 'mjpeg数据请求',
         show: true
       },
-      component: 'RequestData',
-      path: '/screen/requestdata'
+      component: 'mjpeg',
+      path: '/screen/mjpeg'
     },
     {
       name: 'geochina',
@@ -552,8 +552,7 @@ const userNav = options => {
         title: '中国地图',
         show: true
       },
-      component: 'GeoChina',
-      path: '/screen/geochina'
+      component: 'geoChina',
     },
 
     // dashboard

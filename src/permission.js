@@ -14,7 +14,7 @@ const allowList = ['login', 'register', 'registerResult'] // no redirect allowLi
 const loginRoutePath = '/user/login'
 // const defaultRoutePath = '/dashboard/workplace'
 // const defaultRoutePath = '/screen/screenshow'
-const defaultRoutePath = '/screen/requestdata'
+const defaultRoutePath = '/screen/screenshow'
 
 router.beforeEach((to, from, next) => {
   NProgress.start() // start progress bar
